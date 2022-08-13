@@ -15,7 +15,7 @@ export default function App() {
       700: "#0D0D0D"
     },
     purple: "#8284FA",
-    purpleDark: " #5E60CE",
+    purpleDark: "#5E60CE",
     blue: "#4EA8DE",
     danger: "#E25858",
     blueDark: "#1E6F9F"
