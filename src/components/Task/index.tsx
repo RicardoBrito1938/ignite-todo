@@ -23,7 +23,13 @@ const Task = ({ data, onPress, onDelete }: Prop) => {
         color={colors.blueDark}
         onPress={onPress}
       />
-      <Text fontWeight={400} color="gray.100" flex={1} mx={2}>
+      <Text
+        strikeThrough={!!data.done}
+        fontWeight={400}
+        color={data.done ? "gray.300" : "gray.100"}
+        flex={1}
+        mx={2}
+      >
         {data.task}
       </Text>
 
