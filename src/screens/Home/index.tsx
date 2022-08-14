@@ -4,7 +4,8 @@ import {
   IconButton,
   useTheme,
   VStack,
-  Text
+  Text,
+  Divider
 } from "native-base";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
@@ -12,6 +13,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
 import uuid from "react-native-uuid";
 import Task from "../../components/Task";
+import Info from "../../components/Info";
+import NoTasks from "../../components/NoTasks";
 
 type TaskState = {
   id: string | number[];
@@ -49,13 +52,6 @@ const Home = () => {
     setTasks(newList);
   };
 
-  const tasksClosed = tasks.reduce((acc, item) => {
-    if (item.done) {
-      acc += 1;
-    }
-    return acc;
-  }, 0);
-
   return (
     <VStack flex={1} bg="gray.600">
       <Header />
@@ -71,27 +67,18 @@ const Home = () => {
             ml={1}
             w={52}
             bg="blueDark"
+            onPress={() => handleAddTask()}
             icon={
               <AntDesign
                 name="pluscircleo"
                 size={16}
                 color={colors.gray[100]}
-                onPress={() => handleAddTask()}
               />
             }
           />
         </HStack>
 
-        <HStack bg="tomato" justifyContent="space-between">
-          <HStack>
-            <Text>Created</Text>
-            <Text>{tasks.length}</Text>
-          </HStack>
-          <HStack>
-            <Text>Closed</Text>
-            <Text>{tasksClosed}</Text>
-          </HStack>
-        </HStack>
+        <Info tasks={tasks} />
 
         <FlatList
           data={tasks}
@@ -103,6 +90,7 @@ const Home = () => {
               onDelete={() => deleteItem(index)}
             />
           )}
+          ListEmptyComponent={() => <NoTasks />}
         />
       </VStack>
     </VStack>
